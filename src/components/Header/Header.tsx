@@ -10,8 +10,8 @@ const Header = () => {
     <StyledHeader>
       <img src={LogoImg} alt="logo" />
       <StyledIconsDiv>
-        <StyledIcon src={BasketImg} alt="basket" />
         <StyledIcon src={FavoriteImg} alt="favorite" />
+        <StyledIcon src={BasketImg} alt="basket" />
       </StyledIconsDiv>
     </StyledHeader>
   );

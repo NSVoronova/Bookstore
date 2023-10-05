@@ -1,15 +1,24 @@
 import React from 'react'
-import { StyledFooter, StyledP, StyledSocialDiv } from './styledFooter';
+import { StyledFooter, StyledP, StyledSocialDiv, StyledSocialIcon, StyledSocialIconDiv } from './styledFooter';
 import circle_default from '../../assets/icons/default_app.svg'
+import linkedin from '../../assets/icons/LinkedinLogo.svg'
+import github from '../../assets/icons/GithubLogo.svg'
+import instagram from '../../assets/icons/instagram-logo.svg'
 
 const Footer = () => {
   return (
     <StyledFooter>
      <StyledP>BookStore Project</StyledP>
      <StyledSocialDiv>
-      <img src={circle_default} alt="app" />
-      <img src={circle_default} alt="app" />
-      <img src={circle_default} alt="app" />
+      <StyledSocialIconDiv>
+      <StyledSocialIcon src={linkedin} alt="app" />
+      </StyledSocialIconDiv>
+      <StyledSocialIconDiv>
+      <StyledSocialIcon src={github} alt="app" />
+      </StyledSocialIconDiv>
+      <StyledSocialIconDiv>
+      <StyledSocialIcon src={instagram} alt="app" />
+      </StyledSocialIconDiv>
      </StyledSocialDiv>
      <StyledP>by Nadzeya Voranava</StyledP>
     </StyledFooter>

@@ -66,3 +66,9 @@ top: -30px;
   width: 353px;
   border-top: 2px dashed #676767;
 `
+export const StyledFlexDiv = styled.div`
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+row-gap: 50px;
+`

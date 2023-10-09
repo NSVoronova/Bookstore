@@ -24,7 +24,7 @@ const handleClick = () => {
   alert("click");
 };
 
-const templateArray = [
+export const templateArray = [
   {
     image: book_cover,
     title: "Title",
@@ -97,7 +97,6 @@ const MainPage = () => {
           <BookCard key={image} imageSrc={image} price={price}/>
         ))}
       </StyledSimpleDiv>
-      <SectionHeader headerName="Adventure" imageSrc={path_img} />
     </>
   );
 };

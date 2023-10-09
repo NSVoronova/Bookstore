@@ -5,8 +5,12 @@ import { StyledBasketBtn, StyledBookWrapper, StyledFavoriteBtn, StyledPriceDiv, 
 
 
 export interface IBook {
+  title?: string,
   imageSrc: string;
   price: number;
+  description?: string,
+  author?: string,
+  isFavorite?: boolean
 }
 const BookCard: FC<IBook> = ({ imageSrc, price }) => {
   return (
@@ -16,7 +20,7 @@ const BookCard: FC<IBook> = ({ imageSrc, price }) => {
         <StyledPriceDiv>{price}.00$</StyledPriceDiv>
         <StyledFavoriteBtn type="button"></StyledFavoriteBtn>
       </StyledSimpleDiv>
-      <StyledBasketBtn></StyledBasketBtn>
+      <StyledBasketBtn/>
     </StyledBookWrapper>
   );
 };

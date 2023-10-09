@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledHeader = styled.header`
 display: flex;
 justify-content: space-between;
-
+margin-bottom: 105px;
 `
 
 export const StyledIcon = styled.img`

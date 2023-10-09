@@ -16,6 +16,8 @@ justify-content: space-between;
 align-items: center;
 border-top: 2px dashed black;
 padding-top: 44px;
+padding-bottom: 44px;
+margin-top: 100px;
 `
 
 export const StyledSocialDiv = styled.div`

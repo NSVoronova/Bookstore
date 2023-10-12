@@ -3,12 +3,13 @@ import { StyledCategoryBtn } from './StyledButton'
 
 interface IButton {
   text: string,
-  onClick: () => void
+  onClick: () => void,
+  $checked?: boolean
 }
 
-const Button: FC<IButton> = ({text, onClick }) => {
+const Button: FC<IButton> = ({text, onClick, $checked }) => {
   return (
-    <StyledCategoryBtn type='button' onClick={onClick}>
+    <StyledCategoryBtn $checked={!!$checked} type='button' onClick={onClick}>
        {text}
     </StyledCategoryBtn>
   )

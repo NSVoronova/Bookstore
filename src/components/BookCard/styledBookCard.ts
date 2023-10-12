@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import favorite_img from '../../assets/icons/favorite.svg'
+import favoritewhite_img from '../../assets/icons/favorite_white.svg'
 import basket_img from '../../assets/icons/busket.svg'
+import { colors } from "../../styledConstants";
 
 export const StyledBookWrapper = styled.div`
 width: 200px;
 display: flex;
 flex-direction: column;
 `
-export const StyledSimpleDiv = styled.div`
-display: flex;
-justify-content: space-between;
-`
+
 export const StyledPriceDiv = styled.div`
 display: inline-block;
 width: 136px;
@@ -36,8 +35,11 @@ background-image: url(${favorite_img});
 background-position: center;
 background-repeat: no-repeat;
 background-color: white;
+transition: background-color 0.3s ease;
 &:hover {
   cursor: pointer;
+  background-color: ${colors.blue};
+  background-image: url(${favoritewhite_img});
 }
 `
 
@@ -51,7 +53,20 @@ background-image: url(${basket_img});
 background-repeat: no-repeat;
 background-position: center;
 margin-top: 10px;
+transition: background-color 0.3s ease;
 &:hover {
   cursor: pointer;
+  background-color: ${colors.orange};
 }
+`
+
+export const StyledBookImage = styled.img`
+cursor: pointer;
+width: 200px;
+height: 298px;
+object-fit: cover;
+object-position: center;
+border-radius: 10px;
+box-shadow: 10px 12px 10px -6px rgba(61, 60, 60, 0.36);
+margin-bottom: 20px;
 `

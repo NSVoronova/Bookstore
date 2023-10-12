@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const StyledCategoryBtn = styled.button`
+export const StyledCategoryBtn = styled.button<{$checked?: boolean}>`
 width: 387px;
 height: 80px;
 border-radius: 10px;
 border: 2px solid  #3D3C3C;
-background-color: #FFF;
+background-color: ${props => props.$checked ? "#FDBF0F" : "#FFF"};
 box-shadow: 12.5px 14px 0px 0px #F9784B;
 color:  #3D3C3C;
 text-align: center;

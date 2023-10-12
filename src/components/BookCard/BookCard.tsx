@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import basket from "../../assets/icons/busket.svg";
 import favorite from "../../assets/icons/favorite.svg";
-import { StyledBasketBtn, StyledBookWrapper, StyledFavoriteBtn, StyledPriceDiv, StyledSimpleDiv } from "./styledBookCard";
+import { StyledBasketBtn, StyledBookImage, StyledBookWrapper, StyledFavoriteBtn, StyledPriceDiv } from "./styledBookCard";
+import { StyledSimpleDiv } from "../../styledConstants";
 
 
 export interface IBook {
@@ -15,9 +16,9 @@ export interface IBook {
 const BookCard: FC<IBook> = ({ imageSrc, price }) => {
   return (
     <StyledBookWrapper>
-      <img src={imageSrc} alt="img" />
-      <StyledSimpleDiv>
-        <StyledPriceDiv>{price}.00$</StyledPriceDiv>
+      <StyledBookImage src={imageSrc} alt="img" />
+      <StyledSimpleDiv $between>
+        <StyledPriceDiv>{price}$</StyledPriceDiv>
         <StyledFavoriteBtn type="button"></StyledFavoriteBtn>
       </StyledSimpleDiv>
       <StyledBasketBtn/>

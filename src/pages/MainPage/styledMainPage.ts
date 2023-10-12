@@ -15,7 +15,6 @@ export const StyledMainImg = styled.img`
 export const StyledMainWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 100px;
 `;
 
 export const StyledMainHeader = styled.h1`
@@ -29,11 +28,11 @@ export const StyledMainHeader = styled.h1`
   margin-bottom: 18px;
 `;
 
-export const StyledBookImg = styled.img`
+export const StyledBookGif = styled.img`
   width: 141px;
   position: absolute;
   left: 430px;
-  top: 250px;
+  top: 258px;
 `
 
 export const StyledMainText = styled.p`

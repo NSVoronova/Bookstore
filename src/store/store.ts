@@ -3,16 +3,23 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from "@redux-devtools/extension";
 
 const initialState = {
-  theme: "light"
+  headerName: "romance",
+  mainBooks: [],
 };
 
 const rootReducer = (state = initialState, action: any) => {
   switch(action.type) {
-    case "TOGGLE_THEME" : {
+    case 'SET_MAIN_BOOKS':  {
       return {
-        ...state,
-        theme: action.payload,
-      }
+          ...state,
+          mainBooks: action.payload
+      };
+    }
+    case 'SET_HEADER_NAME':  {
+      return {
+          ...state,
+          headerName: action.payload
+      };
     }
     default :
     return state;

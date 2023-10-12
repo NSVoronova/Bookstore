@@ -39,6 +39,7 @@ padding: 25px 30px;
 export const StyledBookImg = styled.img`
 width: 280px;
 height: 417px;
+margin: auto 0;
 `
 
 export const StyledPriceBook = styled.p`

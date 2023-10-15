@@ -10,7 +10,7 @@ export const colors = {
     "linear-gradient(180deg, #3AB8EB 0%, #F9784B 35.21%, #FDBF0F 73.23%, #FFF 100%))",
 };
 
-export const StyledSimpleDiv = styled.div<{
+export const StyledSimpleDiv= styled.div<{
   $between?: boolean;
   $around?: boolean;
   $evenly?: boolean;

@@ -8,11 +8,11 @@ export interface IMainLayout {
 }
 const MainLayout: FC<IMainLayout> = ({children}) => {
   return (
-    <>
+    <div className='wrapper'>
       <Header/>
       <main>{children}</main>
       <Footer/>
-    </>
+    </div>
   )
 }
 

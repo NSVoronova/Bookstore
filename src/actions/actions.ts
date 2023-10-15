@@ -7,10 +7,16 @@ export const FETCH_MAIN_BOOKS = (str: string) => {
   return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
     // dispatch(SET_LOADING_CREATOR());
     try {
-      let response = await  instance.get(`volumes?q=genre:${str}&orderBy=newest&maxResults=5`, {
-          headers: {
-    'Content-Type': 'application/json',
-  },
+      const apiKey = 'AIzaSyA_pSdSoJ5qvreyZHMCUlS5VseySDg3ap4'; 
+      const apiUrl = `volumes?q=genre:${str}&orderBy=relevance&maxResults=5`;
+      const params = {
+        api_key: apiKey
+      }
+      let response = await instance.get(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params
       });
       console.log(response.data.items)
       dispatch({ type: "SET_MAIN_BOOKS", payload: response.data.items });

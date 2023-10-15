@@ -5,6 +5,7 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 const initialState = {
   headerName: "romance",
   mainBooks: [],
+  favoriteBooks: []
 };
 
 const rootReducer = (state = initialState, action: any) => {

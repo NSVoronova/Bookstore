@@ -6,3 +6,10 @@ export {}
 // .then(data => {
 //   const bookInfo = data.items.map((el, index) => {
 //     const { authors, publisher, publishedDate, subtitle, imageLinks, infoLink, description, title } = el.volumeInfo
+
+//https://www.googleapis.com/books/v1/volumes?q=orwell
+
+
+
+
+//key=AIzaSyBXMVNzJjeioXnpMPBcLxjzx4aw5lHXoNw

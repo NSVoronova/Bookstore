@@ -73,11 +73,9 @@ const MainPage = () => {
   const mainBooks = useSelector(({ mainBooks }) => mainBooks);
   console.log(mainBooks);
   const headerName = useSelector(({ headerName }) => headerName);
-  const adventureBooks = useSelector(({ adventureBooks }) => adventureBooks);
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   useEffect(() => {
     dispatch(FETCH_MAIN_BOOKS("romance"));
-    // dispatch(FETCH_ADVENTURE_BOOKS());
   }, []);
   const handleClick = (str: string) => {
     dispatch(FETCH_MAIN_BOOKS(str));
@@ -141,7 +139,8 @@ const MainPage = () => {
           mainBooks.map((book) => (
             <BookCard
               key={book.id}
-              imageSrc={book.volumeInfo.imageLinks?.thumbnail}
+              id={book.id}
+              imageSrc={book.volumeInfo.imageLinks?.small || book.volumeInfo.imageLinks?.thumbnail}
               price={book.saleInfo?.listPrice?.amount || 30}
             />
           ))}

@@ -4,16 +4,27 @@ import MainLayout from './components/MainLayout/MainLayout';
 import MainPage from './pages/MainPage/MainPage';
 import BookPage from './pages/BookPage/BookPage';
 import SearchPage from './pages/SearchPage/SearchPage';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="wrapper">
-      <MainLayout>
-        {/* <BookPage/> */}
+    <><Routes>
+      <Route path="/" element={<MainLayout>
         <MainPage/>
-        {/* <SearchPage/> */}
+      </MainLayout>}/>
+      <Route path='/book/:id' element={
+        <MainLayout>
+        <BookPage/>
       </MainLayout>
-    </div>
+      }/>
+      <Route path='/search' element={
+        <MainLayout>
+        <SearchPage/>
+      </MainLayout>
+      }/>
+    </Routes>
+      
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../styledConstants";
 
 export const StyledBookPageDiv = styled.div`
 display: flex;
@@ -12,7 +13,8 @@ width: 526px;
 `
 
 export const StyledCardFullTitle = styled.div`
-color: #3D3C3C;
+max-width: 420px;
+color: ${colors.darkgrey};
 font-family: Unica One;
 font-size: 36px;
 font-style: normal;
@@ -20,30 +22,33 @@ font-weight: 400;
 line-height: normal;
 `
 
-export const StyledAuthorDiv = styled.div`
+export const StyledAuthorDiv = styled.div<{$description?: boolean}>`
 margin-top: 10px;
 width: 526px;
-min-height: 66px;
+min-height: ${props => props.$description ? "200px" : "66px"};
 border-radius: 20px;
-border: 2px dashed  #3D3C3C;
+border: 2px dashed  ${colors.darkgrey};
 background:  #FFF;
-box-shadow: 9px 7px 0px 0px #3D3C3C;
-color:  #676767;
+box-shadow: 9px 7px 0px 0px ${colors.darkgrey};
+color:  ${colors.lightgrey};
 font-family: Syne;
 font-size: 16px;
 font-style: normal;
 font-weight: 500;
-line-height: normal;
-padding: 25px 30px;
+line-height: 21px;
+padding: 21px 30px;
+overflow: hidden;
 `
 export const StyledBookImg = styled.img`
 width: 280px;
 height: 417px;
 margin: auto 0;
+border-radius: 10px;
+box-shadow: 10px 12px 10px -6px rgba(61, 60, 60, 0.86);
 `
 
 export const StyledPriceBook = styled.p`
-color: #F9784B;
+color: ${colors.orange};
 font-family: Syne;
 font-size: 36px;
 font-style: normal;
@@ -58,13 +63,28 @@ cursor: pointer;
 margin-top: 10px;
 width: 255px;
 height: 46px;
-border: 2px solid #3D3C3C;
+border: 2px solid ${colors.darkgrey};
 border-radius: 20px;
-background-color: ${props => props.$buy ? "#F9784B" : "#FDBF0F"};
-color: #3D3C3C;
+background-color: ${props => props.$buy ? colors.orange : colors.yellow};
+color: ${colors.darkgrey};
 font-family: Syne;
 font-size: 20px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+`
+
+export const StyledTextContainer = styled.div`
+max-height: 150px;
+overflow: auto;
+scrollbar-width: thin; 
+  scrollbar-color: transparent #333; 
+  -ms-overflow-style: none;
+&::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.darkgrey}; 
+    border-radius: 5px;
+  }
 `

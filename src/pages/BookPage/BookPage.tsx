@@ -7,6 +7,7 @@ const BookPage = () => {
   return (
     <>
       <BookCardFull
+        id={firstBook.image}
         title={firstBook.title}
         imageSrc={firstBook.image}
         price={firstBook.price}

@@ -16,6 +16,7 @@ export const StyledSimpleDiv= styled.div<{
   $evenly?: boolean;
 }>`
   display: flex;
+  flex-wrap: wrap;
   justify-content: ${(props) => {
     if (props.$between) return "space-between";
     if (props.$around) return "space-around";
@@ -23,4 +24,9 @@ export const StyledSimpleDiv= styled.div<{
     return "center";
   }};
 `;
+
+export const StyledNullButton = styled.button`
+border: none;
+background-color: transparent;
+`
 

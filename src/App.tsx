@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import MainLayout from './components/MainLayout/MainLayout';
 import MainPage from './pages/MainPage/MainPage';
-import BookPage from './pages/BookPage/BookPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import { Routes, Route } from 'react-router-dom';
+import BookCardFull from './components/BookCardFull/BookCardFull';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       </MainLayout>}/>
       <Route path='/book/:id' element={
         <MainLayout>
-        <BookPage/>
+        <BookCardFull/>
       </MainLayout>
       }/>
       <Route path='/search' element={

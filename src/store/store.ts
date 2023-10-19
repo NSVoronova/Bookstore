@@ -5,7 +5,8 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 const initialState = {
   headerName: "romance",
   mainBooks: [],
-  favoriteBooks: []
+  favoriteBooks: [],
+  currentPage: 1,
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -20,6 +21,12 @@ const rootReducer = (state = initialState, action: any) => {
       return {
           ...state,
           headerName: action.payload
+      };
+    }
+    case 'SET_CURRENT_PAGE': {
+      return {
+        ...state,
+        currentPage: action.payload
       };
     }
     default :

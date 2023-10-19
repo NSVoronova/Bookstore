@@ -23,64 +23,37 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import { FETCH_MAIN_BOOKS } from "../../actions/actions";
+import { useNavigate } from "react-router-dom";
 
-export const templateArray = [
-  {
-    image: book_cover,
-    title: "Title",
-    price: 30.0,
-    author: "Author",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ipsam quibusdam est ut explicabo iste porro nisi, vel totam quis quam sit neque cumque facilis praesentium dignissimos tenetur culpa saepe quaerat rerum. Nesciunt doloremque alias, et unde corrupti tempora, necessitatibus quibusdam temporibus ipsum doloribus minus. Provident consequatur amet tempora porro?",
-  },
-  {
-    image: book_cover,
-    title: "Title",
-    price: 30.0,
-    author: "Author",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ipsam quibusdam est ut explicabo iste porro nisi, vel totam quis quam sit neque cumque facilis praesentium dignissimos tenetur culpa saepe quaerat rerum. Nesciunt doloremque alias, et unde corrupti tempora, necessitatibus quibusdam temporibus ipsum doloribus minus. Provident consequatur amet tempora porro?",
-  },
-  {
-    image: book_cover,
-    title: "Title",
-    price: 30.0,
-    author: "Author",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ipsam quibusdam est ut explicabo iste porro nisi, vel totam quis quam sit neque cumque facilis praesentium dignissimos tenetur culpa saepe quaerat rerum. Nesciunt doloremque alias, et unde corrupti tempora, necessitatibus quibusdam temporibus ipsum doloribus minus. Provident consequatur amet tempora porro?",
-  },
-  {
-    image: book_cover,
-    title: "Title",
-    price: 30.0,
-    author: "Author",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ipsam quibusdam est ut explicabo iste porro nisi, vel totam quis quam sit neque cumque facilis praesentium dignissimos tenetur culpa saepe quaerat rerum. Nesciunt doloremque alias, et unde corrupti tempora, necessitatibus quibusdam temporibus ipsum doloribus minus. Provident consequatur amet tempora porro?",
-  },
-  {
-    image: book_cover,
-    title: "Title",
-    price: 30.0,
-    author: "Author",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ipsam quibusdam est ut explicabo iste porro nisi, vel totam quis quam sit neque cumque facilis praesentium dignissimos tenetur culpa saepe quaerat rerum. Nesciunt doloremque alias, et unde corrupti tempora, necessitatibus quibusdam temporibus ipsum doloribus minus. Provident consequatur amet tempora porro?",
-  },
-];
 
 const MainPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("romance");
-
   const mainBooks = useSelector(({ mainBooks }) => mainBooks);
-  console.log(mainBooks);
+  const currentPage = useSelector(({ currentPage }) => currentPage);
+  const navigate = useNavigate();
+  const [dataSearch, setDataSearch] = useState("");
+
   const headerName = useSelector(({ headerName }) => headerName);
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   useEffect(() => {
-    dispatch(FETCH_MAIN_BOOKS("romance"));
+    dispatch(FETCH_MAIN_BOOKS("romance", 1));
   }, []);
   const handleClick = (str: string) => {
-    dispatch(FETCH_MAIN_BOOKS(str));
+    dispatch(FETCH_MAIN_BOOKS(str, 1));
     setSelectedCategory(str);
+    dispatch({type: 'SET_CURRENT_PAGE', payload: 1})
   };
+
+  const loadMoreBooks = () => {
+    const newPage = currentPage + 1;
+    dispatch({type: 'SET_CURRENT_PAGE', payload: newPage})
+    dispatch(FETCH_MAIN_BOOKS(headerName, newPage));
+  };
+  
+  const handleClickSearch = () => {
+    localStorage.setItem("search", dataSearch);
+    navigate(`/search`);
+  }
 
   return (
     <>
@@ -91,8 +64,8 @@ const MainPage = () => {
           <StyledMainText>
             Explore our catalog and find your next read.
           </StyledMainText>
-          <Input />
-          <StyledExploreButton type="button" onClick={() => {}} />
+          <Input onChange={setDataSearch} value={dataSearch} onClick={handleClickSearch}/>
+          <StyledExploreButton type="button" onClick={handleClickSearch} />
           <StyledDashedDiv></StyledDashedDiv>
         </div>
         <StyledMainImg src={main_img} alt="main_image" />
@@ -140,11 +113,12 @@ const MainPage = () => {
             <BookCard
               key={book.id}
               id={book.id}
-              imageSrc={book.volumeInfo.imageLinks?.small || book.volumeInfo.imageLinks?.thumbnail}
+              imageSrc={book.volumeInfo.imageLinks?.medium ||book.volumeInfo.imageLinks?.small || book.volumeInfo.imageLinks?.thumbnail || book_cover}
               price={book.saleInfo?.listPrice?.amount || 30}
             />
           ))}
       </StyledSimpleDiv>
+      <StyledSimpleDiv><Button text="Load More.." onClick={loadMoreBooks}/></StyledSimpleDiv>
     </>
   );
 };

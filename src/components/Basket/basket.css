@@ -1,0 +1,7 @@
+StyledOverlay {
+  opacity: 0;
+}
+
+StyledOverlay.show {
+  opacity: 1;
+}

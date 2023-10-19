@@ -10,5 +10,5 @@ font-weight: 400;
 line-height: normal;
 gap: 7px;
 margin-top: 150px;
-margin-bottom: 55px;
+margin-bottom: 45px;
 `

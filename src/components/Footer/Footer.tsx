@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyledFooter, StyledP, StyledSocialDiv, StyledSocialIcon, StyledSocialIconDiv } from './styledFooter';
-import circle_default from '../../assets/icons/default_app.svg'
 import linkedin from '../../assets/icons/LinkedinLogo.svg'
 import github from '../../assets/icons/GithubLogo.svg'
 import instagram from '../../assets/icons/instagram-logo.svg'

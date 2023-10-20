@@ -2,14 +2,17 @@ import { legacy_createStore as createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { IAppState } from "../interfaces";
+import { getLocalBooks } from "../helpers";
 
 
 const initialState: IAppState = {
   headerName: "romance",
   mainBooks: [],
-  favoriteBooks: [],
-  basketBooks: [],
+  favoriteBooks: getLocalBooks("favorite"),
+  basketBooks: getLocalBooks("basket"),
   currentPage: 1,
+  countBasket: getLocalBooks("basket").length,
+  countFavorites: getLocalBooks("favorite").length,
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -35,7 +38,29 @@ const rootReducer = (state = initialState, action: any) => {
     case "ADD_TO_BASKET": {
       return {
         ...state,
-        basketBooks: [...state.basketBooks, action.payload],
+        basketBooks: action.payload,
+        countBasket: state.countBasket + 1
+      };
+    }
+    case "REMOVE_FROM_BASKET": {
+      return {
+        ...state,
+        basketBooks: action.payload,
+        countBasket: state.countBasket - 1
+      }
+    }
+    case "ADD_TO_FAVORITE": {
+      return {
+        ...state,
+        favoritesBooks: action.payload,
+        countFavorites: state.countFavorites + 1
+      };
+    }
+    case "REMOVE_FROM_FAVORITE": {
+      return {
+        ...state,
+        favoritesBooks: action.payload,
+        countFavorites: state.countFavorites - 1
       };
     }
     default:

@@ -23,18 +23,22 @@ const BasketBtn = ({
   isAdded: boolean
 }) => {
   const [added, setAdded] = useState(isAdded);
+  const dispatch = useDispatch();
 
   const handleClickToBasket = ({id, imageSrc, price, title, author, isAdded}: IBook) => {
-    const booksBasket: IBook[] = getLocalBooks("basket");
-    const newBook = { id, imageSrc, price, title, author };
-    booksBasket.push(newBook);
-    localStorage.setItem("basket", JSON.stringify({books: booksBasket}));
-    setAdded(true);
+    if (!added) {
+      const booksBasket: IBook[] = getLocalBooks("basket");
+      const newBook = { id, imageSrc, price, title, author };
+      booksBasket.push(newBook);
+      localStorage.setItem("basket", JSON.stringify({books: booksBasket}));
+      setAdded(true);
+      dispatch({type: 'ADD_TO_BASKET', payload: booksBasket})
+    }
   };
 
   return (
     <>
-      <StyledBasketBtn $full={big} $isAdded={added} onClick={() => handleClickToBasket({id, imageSrc, price, title, author})} />
+      <StyledBasketBtn type="button" $full={big} $isAdded={added} onClick={() => handleClickToBasket({id, imageSrc, price, title, author})} disabled={added}/>
     </>
   );
 };

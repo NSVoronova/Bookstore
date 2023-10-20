@@ -59,7 +59,9 @@ const BookCardFull = () => {
   }, [params.id]);
 
   const basketBooks = getLocalBooks("basket");
+  const favoriteBooks = getLocalBooks("favorite");
   const isAdd = basketBooks.find((book: IBook) => book.id === params.id)
+  const isFavorit = favoriteBooks.find((book: IBook) => book.id === params.id)
   return (
     <>
       <StyledBookPageDiv>
@@ -76,7 +78,9 @@ const BookCardFull = () => {
         <StyledCardDescriptionWrapper>
           <StyledSimpleDiv $between>
             <StyledCardFullTitle>{book && book.title}</StyledCardFullTitle>
-            <FavoriteBtn />
+            <FavoriteBtn id={params.id || ""}
+          imageSrc={book?.imageLinks.thumbnail || ""}
+         isFavorite={isFavorit}/>
           </StyledSimpleDiv>
           <StyledAuthorDiv>
             Author(s):{" "}

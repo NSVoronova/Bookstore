@@ -14,6 +14,7 @@ export const StyledSimpleDiv= styled.div<{
   $between?: boolean;
   $around?: boolean;
   $evenly?: boolean;
+  $start?: boolean
 }>`
   display: flex;
   flex-wrap: wrap;
@@ -21,6 +22,7 @@ export const StyledSimpleDiv= styled.div<{
     if (props.$between) return "space-between";
     if (props.$around) return "space-around";
     if (props.$evenly) return "space-evenly";
+    if (props.$start) return "flex-start";
     return "center";
   }};
 `;

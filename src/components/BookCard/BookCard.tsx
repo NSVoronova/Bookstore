@@ -10,7 +10,7 @@ import FavoriteBtn from "../FavoriteBtn/FavoriteBtn";
 import BasketBtn from "../BasketBtn/BasketBtn";
 import { IBook } from "../../interfaces";
 
-const BookCard: FC<IBook> = ({ imageSrc, price, id, title, author, isAdded }) => {
+const BookCard: FC<IBook> = ({ imageSrc, price, id, title, author, isAdded, isFavorite }) => {
   const navigate = useNavigate();
 
   const handleClickToBook = () => {
@@ -23,7 +23,9 @@ const BookCard: FC<IBook> = ({ imageSrc, price, id, title, author, isAdded }) =>
       <StyledBookImage src={imageSrc} alt="img" onClick={handleClickToBook} />
       <StyledSimpleDiv $between>
         <StyledPriceDiv>{price}$</StyledPriceDiv>
-        <FavoriteBtn />
+        <FavoriteBtn id={id}
+        imageSrc={imageSrc}
+         isFavorite={isFavorite || false}/>
       </StyledSimpleDiv>
       <BasketBtn
         isAdded={isAdded || false}

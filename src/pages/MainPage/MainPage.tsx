@@ -57,7 +57,9 @@ const MainPage = () => {
     localStorage.setItem("search", dataSearch);
     navigate(`/search`);
   }
-  const basketBooks = getLocalBooks("basket");
+  // const [basketBooks, setBasketBooks] = useState(getLocalBooks("basket"));
+  const basketBooks = useSelector(({basketBooks}) => basketBooks)
+  const favoriteBooks = useSelector(({favoriteBooks}) => favoriteBooks)
 
   return (
     <>
@@ -111,10 +113,11 @@ const MainPage = () => {
         headerName={headerName.charAt(0).toUpperCase() + headerName.slice(1)}
         imageSrc={path_img}
       />
-      <StyledSimpleDiv $between>
+      <StyledSimpleDiv $start>
         {Array.isArray(mainBooks) &&
           mainBooks.map((book) => (
             <BookCard
+              isFavorite={favoriteBooks.find((item: IBook) => item.id === book.id)}
               isAdded={basketBooks.find((item: IBook) => item.id === book.id)}
               key={book.id}
               id={book.id}

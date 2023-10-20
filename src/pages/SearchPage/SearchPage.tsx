@@ -9,6 +9,7 @@ import {
 import { StyledSimpleDiv } from "../../styledConstants";
 import BookCard from "../../components/BookCard/BookCard";
 import { fetchSearch } from "../../helpers";
+import { StyledCardFullTitle } from "../../components/BookCardFull/styledCardFull";
 
 const SearchPage = () => {
   // const location = useLocation();
@@ -32,9 +33,9 @@ const SearchPage = () => {
         <Input onChange={setDataSearch} value={dataSearch || ""} onClick={handleSearch} />
       </StyledSimpleDiv>
       <StyledSimpleDiv $between style={{ marginTop: "60px" }}>
-        <div>
+        <StyledCardFullTitle>
           Results "<span>{dataSearch}</span>"
-        </div>
+        </StyledCardFullTitle>
         <StyledSimpleDiv $between>
           <StyledSelect $categories defaultValue="Categories">
           <StyledOption value="Categories" disabled hidden>

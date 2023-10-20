@@ -16,4 +16,6 @@ export interface IAppState {
   favoriteBooks: IBook[];
   basketBooks: IBook[];
   currentPage: number;
+  countBasket: number;
+  countFavorites: number
 }

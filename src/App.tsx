@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage/MainPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import { Routes, Route } from 'react-router-dom';
 import BookCardFull from './components/BookCardFull/BookCardFull';
+import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
 
 function App() {
   return (
@@ -22,6 +23,12 @@ function App() {
         <SearchPage/>
       </MainLayout>
       }/>
+      <Route path='/favorites' element={
+        <MainLayout>
+        <FavoritesPage/>
+      </MainLayout>
+      }/>
+
     </Routes>
       
     </>

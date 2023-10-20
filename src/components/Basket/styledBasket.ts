@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { colors } from "../../styledConstants";
 
 export const StyledBasketContainer = styled.div<{$open?: boolean}>`
   position: fixed;
   top: 0;
-  right: ${props => props.$open ? "0" : "-400px"};
-  width: 400px;
+  right: ${props => props.$open ? "0" : "-486px"};
+  width: 486px;
   height: 100%;
   padding: 50px 33px 0px 37px;
   background-color: #fff;
@@ -27,4 +28,17 @@ export const StyledOverlay = styled.div<{$open?: boolean}>`
 
 export const StyledBasketHeader = styled.div`
 
+`
+
+export const StyledBooksContainer = styled.div`
+  overflow-y: auto;
+  height: 500px;
+  width: 100%;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.lightgrey}; 
+    border-radius: 5px;
+  }
 `

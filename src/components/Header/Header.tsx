@@ -5,6 +5,7 @@ import FavoriteImg from '../../assets/icons/favorite.svg'
 import { StyledHeader, StyledIcon, StyledIconsDiv } from './styledHeader';
 import { useNavigate } from 'react-router-dom';
 import Basket from '../Basket/Basket';
+import { getLocalBooks } from '../../helpers';
 
 
 const Header = () => {
@@ -24,6 +25,7 @@ const Header = () => {
   const [isBasketOpen, setIsBasketOpen] = useState(false); // надо false
   const openBasket = () => {
     setIsBasketOpen(true);
+
   }
   
   const closeBasket = () => {

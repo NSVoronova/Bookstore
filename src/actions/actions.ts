@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import instance from "../axiosConfig/axiosConfig";
 import { apiKey } from "../key";
+import { IBook } from "../interfaces";
 
 
 export const FETCH_MAIN_BOOKS = (str: string, currentPage: number) => {
@@ -29,3 +30,9 @@ export const FETCH_MAIN_BOOKS = (str: string, currentPage: number) => {
   };
 };
 
+export const ADD_TO_BASKET = (book: IBook) => {
+  return {
+    type: "ADD_TO_BASKET",
+    payload: book,
+  };
+};

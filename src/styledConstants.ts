@@ -26,6 +26,7 @@ export const StyledSimpleDiv= styled.div<{
 `;
 
 export const StyledNullButton = styled.button`
+cursor: pointer;
 border: none;
 background-color: transparent;
 `

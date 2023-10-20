@@ -1,22 +1,16 @@
 import React, { FC } from "react";
-import { StyledBookImage, StyledBookWrapper, StyledPriceDiv } from "./styledBookCard";
+import {
+  StyledBookImage,
+  StyledBookWrapper,
+  StyledPriceDiv,
+} from "./styledBookCard";
 import { StyledSimpleDiv } from "../../styledConstants";
 import { useNavigate } from "react-router-dom";
 import FavoriteBtn from "../FavoriteBtn/FavoriteBtn";
 import BasketBtn from "../BasketBtn/BasketBtn";
+import { IBook } from "../../interfaces";
 
-
-export interface IBook {
-  id: string,
-  title?: string,
-  imageSrc: string;
-  price: number;
-  description?: string,
-  author?: string,
-  isFavorite?: boolean
-}
-
-const BookCard: FC<IBook> = ({ imageSrc, price, id }) => {
+const BookCard: FC<IBook> = ({ imageSrc, price, id, title, author, isAdded }) => {
   const navigate = useNavigate();
 
   const handleClickToBook = () => {
@@ -26,12 +20,20 @@ const BookCard: FC<IBook> = ({ imageSrc, price, id }) => {
 
   return (
     <StyledBookWrapper>
-      <StyledBookImage src={imageSrc} alt="img" onClick={handleClickToBook}/>
+      <StyledBookImage src={imageSrc} alt="img" onClick={handleClickToBook} />
       <StyledSimpleDiv $between>
         <StyledPriceDiv>{price}$</StyledPriceDiv>
-        <FavoriteBtn/>
+        <FavoriteBtn />
       </StyledSimpleDiv>
-      <BasketBtn big={false}/>
+      <BasketBtn
+        isAdded={isAdded || false}
+        big={false}
+        id={id}
+        imageSrc={imageSrc}
+        price={price}
+        title={title || ""}
+        author={author || ""}
+      />
     </StyledBookWrapper>
   );
 };

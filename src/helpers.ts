@@ -41,3 +41,9 @@ export const fetchSearch = async (str: string, func: React.Dispatch<React.SetSta
     console.log(err);
   }
 }
+
+export const getLocalBooks = (name: string) => {
+  const str = localStorage.getItem(name);
+  const obj = str ? JSON.parse(str) : {books: []};
+  return obj.books;
+}

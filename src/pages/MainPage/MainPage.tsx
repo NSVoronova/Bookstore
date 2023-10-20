@@ -17,16 +17,19 @@ import {
 } from "./styledMainPage";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import Button from "../../components/Button/Button";
-import BookCard, { IBook } from "../../components/BookCard/BookCard";
+import BookCard from "../../components/BookCard/BookCard";
 import { StyledSimpleDiv } from "../../styledConstants";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import { FETCH_MAIN_BOOKS } from "../../actions/actions";
 import { useNavigate } from "react-router-dom";
+import { IBook } from "../../interfaces";
+import { getLocalBooks } from "../../helpers";
 
 
 const MainPage = () => {
+
   const [selectedCategory, setSelectedCategory] = useState("romance");
   const mainBooks = useSelector(({ mainBooks }) => mainBooks);
   const currentPage = useSelector(({ currentPage }) => currentPage);
@@ -54,6 +57,7 @@ const MainPage = () => {
     localStorage.setItem("search", dataSearch);
     navigate(`/search`);
   }
+  const basketBooks = getLocalBooks("basket");
 
   return (
     <>
@@ -111,10 +115,13 @@ const MainPage = () => {
         {Array.isArray(mainBooks) &&
           mainBooks.map((book) => (
             <BookCard
+              isAdded={basketBooks.find((item: IBook) => item.id === book.id)}
               key={book.id}
               id={book.id}
               imageSrc={book.volumeInfo.imageLinks?.medium ||book.volumeInfo.imageLinks?.small || book.volumeInfo.imageLinks?.thumbnail || book_cover}
               price={book.saleInfo?.listPrice?.amount || 30}
+              author={(Array.isArray(book?.volumeInfo.authors) && book && book.volumeInfo.authors.join(", ")) || ""}
+              title={(book && book.volumeInfo.title) || ""}
             />
           ))}
       </StyledSimpleDiv>

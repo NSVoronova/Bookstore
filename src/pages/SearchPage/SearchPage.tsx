@@ -8,23 +8,30 @@ import {
 } from "./styledSearch";
 import { StyledSimpleDiv } from "../../styledConstants";
 import BookCard from "../../components/BookCard/BookCard";
-import { fetchSearch } from "../../helpers";
 import { StyledCardFullTitle } from "../../components/BookCardFull/styledCardFull";
+import Loader from "../../components/Loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { FETCH_SEARCH } from "../../actions/actions";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 
 const SearchPage = () => {
-  // const location = useLocation();
+  const isLoading = useSelector(({isLoading}) => isLoading);
   const storageSearch = localStorage.getItem("search")
   const [dataSearch, setDataSearch] = useState(storageSearch || "");
   const [searchResult, setSearchResult] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All"); 
+  const [selectedFilter, setSelectedFilter] = useState("Not filtered"); 
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
 
   useEffect(() => {
     if(storageSearch && storageSearch !== "") {
-      fetchSearch(storageSearch, setSearchResult)
+      dispatch(FETCH_SEARCH(storageSearch, setSearchResult,  selectedCategory, selectedFilter))
     }
   }, [])
 
   const handleSearch = () => {
-   fetchSearch(dataSearch, setSearchResult)
+    dispatch(FETCH_SEARCH(dataSearch, setSearchResult, selectedCategory, selectedFilter));
    localStorage.setItem("search", dataSearch);
   }
   return (
@@ -37,28 +44,23 @@ const SearchPage = () => {
           Results "<span>{dataSearch}</span>"
         </StyledCardFullTitle>
         <StyledSimpleDiv $between>
-          <StyledSelect $categories defaultValue="Categories">
-          <StyledOption value="Categories" disabled hidden>
-                Categories
-              </StyledOption>
-              <StyledOption  value="option1">All</StyledOption>
-              <StyledOption value="option1">Romance</StyledOption>
-              <StyledOption value="option2">Fantasy</StyledOption>
-              <StyledOption value="option2">History</StyledOption>
-              <StyledOption value="option2">Biography</StyledOption>
-              <StyledOption value="option2">Fiction</StyledOption>
+          <StyledSelect $categories value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+              <StyledOption  value="All">All categories</StyledOption>
+              <StyledOption value="Romance">Romance</StyledOption>
+              <StyledOption value="Fantasy">Fantasy</StyledOption>
+              <StyledOption value="History">History</StyledOption>
+              <StyledOption value="Biography">Biography</StyledOption>
+              <StyledOption value="Fiction">Fiction</StyledOption>
           </StyledSelect>
-            <StyledSelect defaultValue="Filter By">
-              <StyledOption value="Filter By" disabled hidden>
-                Filter By
-              </StyledOption>
-              <StyledOption  value="option1">Not filtered</StyledOption>
-              <StyledOption value="option1">Relevance</StyledOption>
-              <StyledOption value="option2">Newest</StyledOption>
+            <StyledSelect value={selectedFilter}  onChange={(e) => setSelectedFilter(e.target.value)}>
+              <StyledOption  value="Not filtered">Not filtered</StyledOption>
+              <StyledOption value="Relevance">Relevance</StyledOption>
+              <StyledOption value="Newest">Newest</StyledOption>
             </StyledSelect>
         </StyledSimpleDiv>
       </StyledSimpleDiv>
       <StyledDashLine />
+      {isLoading ? <Loader/> :
       <StyledSimpleDiv $between>
         {Array.isArray(searchResult) &&
           searchResult.map((book) => (
@@ -69,7 +71,7 @@ const SearchPage = () => {
               price={book.saleInfo?.listPrice?.amount || 30}
             />
           ))}
-      </StyledSimpleDiv>
+      </StyledSimpleDiv>}
     </>
   );
 };

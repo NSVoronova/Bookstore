@@ -17,5 +17,6 @@ export interface IAppState {
   basketBooks: IBook[];
   currentPage: number;
   countBasket: number;
-  countFavorites: number
+  countFavorites: number;
+  isLoading: boolean;
 }

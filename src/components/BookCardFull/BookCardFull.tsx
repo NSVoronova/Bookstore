@@ -13,21 +13,33 @@ import {
   StyledTextContainer,
 } from "./styledCardFull";
 import { StyledSimpleDiv } from "../../styledConstants";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import FavoriteBtn from "../FavoriteBtn/FavoriteBtn";
 import BasketBtn from "../BasketBtn/BasketBtn";
-import { fetchBook, fetchRandomBooks, getLocalBooks } from "../../helpers";
+import {fetchRandomBooks, getLocalBooks } from "../../helpers";
 import { IBook } from "../../interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { FETCH_BOOK } from "../../actions/actions";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
+import Loader from "../Loader/Loader";
 
 export interface IbookAPI {
   id: string;
-  authors: [];
-  title: string;
-  description: string;
-  imageLinks: {
-    thumbnail: string;
-    small: string;
-    medium?: string;
+  volumeInfo: {
+    imageLinks: {
+      thumbnail: string;
+      small?: string;
+      medium?: string;
+    };
+    title: string;
+    authors: [];
+    description: string;
+  };
+  saleInfo: {
+    listPrice?: {
+      amount: number;
+    };
   };
 }
 
@@ -39,6 +51,8 @@ interface IRandomBook {
       small?: string;
       medium?: string;
     };
+    title: string;
+    authors: []
   };
   saleInfo: {
     listPrice?: {
@@ -47,61 +61,69 @@ interface IRandomBook {
   };
 }
 const BookCardFull = () => {
+  const isLoading = useSelector(({isLoading}) => isLoading);
+  const basketBooks = getLocalBooks("basket");
+  const favoriteBooks = getLocalBooks("favorite");
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  const basketB = useSelector(({basketBooks}) => basketBooks)
   const params = useParams();
   const [book, setBook] = useState<IbookAPI | null>(null);
   const [books, setBooks] = useState([]);
+  const [addBasket, setAddBasket] = useState(basketB.find((book: IBook) => book.id === params.id))
+  const [isFavorite, setIsFavorite] = useState(favoriteBooks.find((book: IBook) => book.id === params.id))
   console.log(book);
   useEffect(() => {
-    fetchBook(params.id || "", setBook);
-  }, [params.id]);
-  useEffect(() => {
+    dispatch(FETCH_BOOK(params.id || "", setBook));
     fetchRandomBooks(setBooks);
+    setAddBasket(basketBooks.find((book: IBook) => book.id === params.id));
   }, [params.id]);
+  // useEffect(() => {
+  //   setIsAdd(basketBooks.find((book: IBook) => book.id === params.id))
+  // }, [book]);
 
-  const basketBooks = getLocalBooks("basket");
-  const favoriteBooks = getLocalBooks("favorite");
-  const isAdd = basketBooks.find((book: IBook) => book.id === params.id)
-  const isFavorit = favoriteBooks.find((book: IBook) => book.id === params.id)
+  // const isAdd = 
+  // const isFavorit = favoriteBooks.find((book: IBook) => book.id === params.id)
   return (
     <>
-      <StyledBookPageDiv>
+    {isLoading ? <Loader/> :
+      <><StyledBookPageDiv>
         <StyledBookImg
           src={
             (book &&
-              (book.imageLinks.medium ||
-                book.imageLinks.small ||
-                book?.imageLinks.thumbnail)) ||
+              (book.volumeInfo.imageLinks.medium ||
+                book.volumeInfo.imageLinks.small ||
+                book.volumeInfo.imageLinks.thumbnail)) ||
             ""
           }
           alt="book_img"
         />
         <StyledCardDescriptionWrapper>
           <StyledSimpleDiv $between>
-            <StyledCardFullTitle>{book && book.title}</StyledCardFullTitle>
+            <StyledCardFullTitle>{book && book.volumeInfo.title}</StyledCardFullTitle>
             <FavoriteBtn id={params.id || ""}
-          imageSrc={book?.imageLinks.thumbnail || ""}
-         isFavorite={isFavorit}/>
+          imageSrc={book?.volumeInfo.imageLinks.thumbnail || ""}
+         isFavorite={favoriteBooks.find((book: IBook) => book.id === params.id)}/>
           </StyledSimpleDiv>
           <StyledAuthorDiv>
             Author(s):{" "}
-            {Array.isArray(book?.authors) && book && book.authors.join(", ")}
+            {Array.isArray(book?.volumeInfo.authors) && book && book.volumeInfo.authors.join(", ")}
           </StyledAuthorDiv>
           <StyledAuthorDiv $description>
-            <StyledTextContainer>{book?.description || ""}</StyledTextContainer>
+            <StyledTextContainer>{book?.volumeInfo.description || ""}</StyledTextContainer>
           </StyledAuthorDiv>
           <StyledSimpleDiv $between>
-            <StyledPriceBook>$30.00</StyledPriceBook>
+            <StyledPriceBook>${book?.saleInfo.listPrice?.amount || "30"}</StyledPriceBook>
             <div>Count</div>
           </StyledSimpleDiv>
           <StyledSimpleDiv $between>
             <BasketBtn
-              isAdded={isAdd}
+              isAdded={addBasket}
               big
               id={params.id || ""}
-              imageSrc={book?.imageLinks.thumbnail || ""}
+              imageSrc={book?.volumeInfo.imageLinks.thumbnail || ""}
               price={30}
-              title={(book && book.title) || ""}
-              author={(Array.isArray(book?.authors) && book && book.authors.join(", ")) || ""}
+              title={(book && book.volumeInfo.title) || ""}
+              author={(Array.isArray(book?.volumeInfo.authors) && book && book.volumeInfo.authors.join(", ")) || ""}
             />
             <StyledBuyButton $buy>Buy Now</StyledBuyButton>
           </StyledSimpleDiv>
@@ -112,6 +134,7 @@ const BookCardFull = () => {
         {Array.isArray(books) &&
           books.map((book: IRandomBook) => (
             <BookCard
+              isFavorite={favoriteBooks.find((item: IBook) => item.id === book.id)}
               isAdded={basketBooks.find((item: IBook) => item.id === book.id)}
               key={book.id}
               id={book.id}
@@ -121,9 +144,11 @@ const BookCardFull = () => {
                 book.volumeInfo.imageLinks?.thumbnail
               }
               price={book.saleInfo?.listPrice?.amount || 30}
+              author={(Array.isArray(book?.volumeInfo.authors) && book && book.volumeInfo.authors.join(", ")) || ""}
+              title={(book && book.volumeInfo.title) || ""}
             />
           ))}
-      </StyledSimpleDiv>
+      </StyledSimpleDiv></>}
     </>
   );
 };

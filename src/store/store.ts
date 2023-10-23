@@ -13,6 +13,7 @@ const initialState: IAppState = {
   currentPage: 1,
   countBasket: getLocalBooks("basket").length,
   countFavorites: getLocalBooks("favorite").length,
+  isLoading: false,
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -62,6 +63,12 @@ const rootReducer = (state = initialState, action: any) => {
         favoritesBooks: action.payload,
         countFavorites: state.countFavorites - 1
       };
+    }
+    case "SET_LOADING" : {
+      return {
+        ...state,
+        isLoading: !state.isLoading,
+      }
     }
     default:
       return state;

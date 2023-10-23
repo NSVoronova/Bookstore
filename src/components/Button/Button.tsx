@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { StyledCategoryBtn } from './StyledButton'
 
 interface IButton {
-  text: string,
   onClick: () => void,
-  $checked?: boolean
+  $checked?: boolean,
+  text: "string" | ReactNode
 }
 
 const Button: FC<IButton> = ({text, onClick, $checked }) => {

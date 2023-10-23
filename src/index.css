@@ -16,8 +16,12 @@ body,
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
+  position: relative;
 }
 main {
    flex: 1 1 auto;
+   /* position: relative; */
+}
+.modal-open {
+  overflow: hidden;
 }

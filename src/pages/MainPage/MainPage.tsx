@@ -26,10 +26,12 @@ import { FETCH_MAIN_BOOKS } from "../../actions/actions";
 import { useNavigate } from "react-router-dom";
 import { IBook } from "../../interfaces";
 import { getLocalBooks } from "../../helpers";
+import Loader from "../../components/Loader/Loader";
 
 
 const MainPage = () => {
-
+  const isLoading = useSelector(({isLoading}) => isLoading);
+  
   const [selectedCategory, setSelectedCategory] = useState("romance");
   const mainBooks = useSelector(({ mainBooks }) => mainBooks);
   const currentPage = useSelector(({ currentPage }) => currentPage);
@@ -128,7 +130,7 @@ const MainPage = () => {
             />
           ))}
       </StyledSimpleDiv>
-      <StyledSimpleDiv><Button text="Load More.." onClick={loadMoreBooks}/></StyledSimpleDiv>
+      <StyledSimpleDiv><Button onClick={loadMoreBooks} text={isLoading ? <Loader/> : "Load More.."}></Button></StyledSimpleDiv>
     </>
   );
 };

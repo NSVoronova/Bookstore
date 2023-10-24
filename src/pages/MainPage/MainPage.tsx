@@ -34,6 +34,9 @@ const MainPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("romance");
   const mainBooks = useSelector(({ mainBooks }) => mainBooks);
   const currentPage = useSelector(({ currentPage }) => currentPage);
+  const basketBooks = useSelector(({basketBooks}) => basketBooks)
+  // const basketBooks = getLocalBooks("basket")
+  const favoriteBooks = useSelector(({favoriteBooks}) => favoriteBooks)
   const navigate = useNavigate();
   const [dataSearch, setDataSearch] = useState("");
 
@@ -58,10 +61,12 @@ const MainPage = () => {
     localStorage.setItem("search", dataSearch);
     navigate(`/search`);
   }
-  // const [basketBooks, setBasketBooks] = useState(getLocalBooks("basket"));
-  const basketBooks = useSelector(({basketBooks}) => basketBooks)
-  const favoriteBooks = useSelector(({favoriteBooks}) => favoriteBooks)
-
+//   const [renderCount, setRenderCount] = useState(0);
+// const forceRerender = () =>{
+//   setRenderCount((count) => count + 1);
+//   dispatch(FETCH_MAIN_BOOKS(headerName, 1))
+//   console.log(mainBooks);
+// } 
   return (
     <>
       <StyledMainWrapper>
@@ -114,12 +119,13 @@ const MainPage = () => {
         headerName={headerName.charAt(0).toUpperCase() + headerName.slice(1)}
         imageSrc={path_img}
       />
+      {/* <button onClick={forceRerender}>rerender {renderCount}</button> */}
       <StyledSimpleDiv $start>
         {Array.isArray(mainBooks) &&
           mainBooks.map((book) => (
             <BookCard
               isFavorite={favoriteBooks.find((item: IBook) => item.id === book.id)}
-              isAdded={basketBooks.find((item: IBook) => item.id === book.id)}
+              isAdded={book.isAdded}
               key={book.id}
               id={book.id}
               imageSrc={book.volumeInfo.imageLinks?.medium ||book.volumeInfo.imageLinks?.small || book.volumeInfo.imageLinks?.thumbnail || book_cover}

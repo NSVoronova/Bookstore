@@ -8,6 +8,7 @@ import { StyledBookFavoriteContainer, StyledFavoriteIconBtn, StyledRemoveFavorit
 import { useNavigate } from 'react-router-dom'
 import { IBook } from '../../interfaces'
 import { useDispatch } from 'react-redux'
+import NothingFound from '../SearchPage/NothingFound/NothingFound'
 
 const FavoritesPage = () => {
   const [favoriteBooks, setFavoriteBooks] = useState(getLocalBooks("favorite"));
@@ -28,6 +29,7 @@ const FavoritesPage = () => {
     <>
       <StyledCardFullTitle>My Favorite Books</StyledCardFullTitle>
       <StyledDashLine />
+      {favoriteBooks.length ? 
       <StyledSimpleDiv $start>
         {Array.isArray(favoriteBooks) && favoriteBooks.map((book) => (
           <StyledBookFavoriteContainer key={book.id}>
@@ -36,7 +38,7 @@ const FavoritesPage = () => {
           <StyledRemoveFavoriteBtn onClick={() => handleRemoveFavoriteBook(book.id)}></StyledRemoveFavoriteBtn>
           </StyledBookFavoriteContainer>
         ))}
-      </StyledSimpleDiv>
+      </StyledSimpleDiv> : <NothingFound str="Favorite some book :)"/>}
     </>
   )
 }

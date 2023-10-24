@@ -53,14 +53,14 @@ const rootReducer = (state = initialState, action: any) => {
     case "ADD_TO_FAVORITE": {
       return {
         ...state,
-        favoritesBooks: action.payload,
+        favoriteBooks: action.payload,
         countFavorites: state.countFavorites + 1
       };
     }
     case "REMOVE_FROM_FAVORITE": {
       return {
         ...state,
-        favoritesBooks: action.payload,
+        favoriteBooks: action.payload,
         countFavorites: state.countFavorites - 1
       };
     }

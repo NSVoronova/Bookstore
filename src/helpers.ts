@@ -13,7 +13,6 @@ export const fetchRandomBooks = async (func: React.Dispatch<React.SetStateAction
     }
     const response = await instance.get(url, {params});
     const randomBooks = response.data.items;
-    console.log(randomBooks);
     func(randomBooks);
   } catch (err) {
     console.log(err)

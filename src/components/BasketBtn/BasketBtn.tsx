@@ -23,12 +23,14 @@ const BasketBtn = ({
   author: string;
   isAdded: boolean
 }) => {
+  
   const basketBooks = useSelector(({basketBooks}) => basketBooks)
-  const [added, setAdded] = useState(basketBooks.find((book:IBook) => book.id === id)) //useState(isAdded);
+  const [added, setAdded] = useState(isAdded) //useState(isAdded);
   const dispatch = useDispatch();
-
+  
   const handleClickToBasket = ({id, imageSrc, price, title, author, isAdded}: IBook) => {
-    if (!added) {
+    console.log(isAdded)
+    if (!isAdded) {
       const booksBasket: IBook[] = getLocalBooks("basket");
       const newBook = { id, imageSrc, price, title, author };
       booksBasket.push(newBook);

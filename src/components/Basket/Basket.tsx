@@ -8,10 +8,13 @@ import { getLocalBooks } from '../../helpers';
 import { IBook } from '../../interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledBuyButton } from '../BookCardFull/styledCardFull';
+import { FETCH_MAIN_BOOKS } from '../../actions/actions';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 
 const Basket = ({ isOpen, closeBasket }: { isOpen: boolean, closeBasket: () => void }) => {
   const overlayClass = isOpen ? 'show' : '';
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const mainBooks = useSelector(({mainBooks}) => mainBooks)
 
    const [basketBooks, setBasketBooks] = useState(getLocalBooks("basket"));
@@ -29,6 +32,8 @@ const handleDeleteBook = (id: string) => {
   setBasketBooks(updatedBasket);
   localStorage.setItem("basket", JSON.stringify({ books: updatedBasket }));
   dispatch({type: "REMOVE_FROM_BASKET", payload: updatedBasket});
+  dispatch(FETCH_MAIN_BOOKS("romance", 1));
+  dispatch({type: 'SET_CURRENT_PAGE', payload: 1})
 }
   return (
     <>

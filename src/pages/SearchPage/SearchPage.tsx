@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FETCH_SEARCH } from "../../actions/actions";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
+import NothingFound from "./NothingFound/NothingFound";
 
 const SearchPage = () => {
   const isLoading = useSelector(({isLoading}) => isLoading);
@@ -34,6 +35,7 @@ const SearchPage = () => {
     dispatch(FETCH_SEARCH(dataSearch, setSearchResult, selectedCategory, selectedFilter));
    localStorage.setItem("search", dataSearch);
   }
+  console.log(searchResult)
   return (
     <>
       <StyledSimpleDiv>
@@ -60,7 +62,7 @@ const SearchPage = () => {
         </StyledSimpleDiv>
       </StyledSimpleDiv>
       <StyledDashLine />
-      {isLoading ? <Loader/> :
+      {isLoading ? <Loader/> : Array.isArray(searchResult) ?
       <StyledSimpleDiv $between>
         {Array.isArray(searchResult) &&
           searchResult.map((book) => (
@@ -71,7 +73,7 @@ const SearchPage = () => {
               price={book.saleInfo?.listPrice?.amount || 30}
             />
           ))}
-      </StyledSimpleDiv>}
+      </StyledSimpleDiv> : <NothingFound str="Nothing was found :\"/>}
     </>
   );
 };

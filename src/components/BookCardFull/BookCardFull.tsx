@@ -23,6 +23,7 @@ import { FETCH_BOOK } from "../../actions/actions";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import Loader from "../Loader/Loader";
+import book_cover from '../../assets/images/book_cover.jpg'
 
 export interface IbookAPI {
   id: string;
@@ -41,6 +42,7 @@ export interface IbookAPI {
       amount: number;
     };
   };
+  isAdded?:boolean;
 }
 
 interface IRandomBook {
@@ -71,7 +73,6 @@ const BookCardFull = () => {
   const [books, setBooks] = useState([]);
   const [addBasket, setAddBasket] = useState(basketB.find((book: IBook) => book.id === params.id))
   const [isFavorite, setIsFavorite] = useState(favoriteBooks.find((book: IBook) => book.id === params.id))
-  console.log(book);
   useEffect(() => {
     dispatch(FETCH_BOOK(params.id || "", setBook));
     fetchRandomBooks(setBooks);
@@ -89,11 +90,11 @@ const BookCardFull = () => {
       <><StyledBookPageDiv>
         <StyledBookImg
           src={
-            (book &&
-              (book.volumeInfo.imageLinks.medium ||
-                book.volumeInfo.imageLinks.small ||
-                book.volumeInfo.imageLinks.thumbnail)) ||
-            ""
+            
+              (book?.volumeInfo.imageLinks?.medium ||
+                book?.volumeInfo.imageLinks?.small ||
+                book?.volumeInfo.imageLinks?.thumbnail) || book_cover
+            
           }
           alt="book_img"
         />
@@ -113,7 +114,6 @@ const BookCardFull = () => {
           </StyledAuthorDiv>
           <StyledSimpleDiv $between>
             <StyledPriceBook>${book?.saleInfo.listPrice?.amount || "30"}</StyledPriceBook>
-            <div>Count</div>
           </StyledSimpleDiv>
           <StyledSimpleDiv $between>
             <BasketBtn
@@ -141,7 +141,7 @@ const BookCardFull = () => {
               imageSrc={
                 book.volumeInfo.imageLinks?.medium ||
                 book.volumeInfo.imageLinks?.small ||
-                book.volumeInfo.imageLinks?.thumbnail
+                book.volumeInfo.imageLinks?.thumbnail || book_cover
               }
               price={book.saleInfo?.listPrice?.amount || 30}
               author={(Array.isArray(book?.volumeInfo.authors) && book && book.volumeInfo.authors.join(", ")) || ""}

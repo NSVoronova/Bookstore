@@ -4,6 +4,8 @@ import instance from "../axiosConfig/axiosConfig";
 import { apiKey } from "../key";
 import { IBook } from "../interfaces";
 import { IbookAPI } from "../components/BookCardFull/BookCardFull";
+import { useSelector } from "react-redux";
+import { getLocalBooks } from "../helpers";
 
 export const SET_LOADING_CREATOR = () => ({ type: "SET_LOADING" });
 
@@ -13,17 +15,22 @@ export const FETCH_MAIN_BOOKS = (str: string, currentPage: number) => {
     try {
       const maxRes = currentPage  * 5;
       const apiUrl = `volumes?q=subject:${str}&orderBy=newest&maxResults=${maxRes}`;
-      // const params = {
-      //   api_key: apiKey
-      // }
+      const params = {
+        api_key: apiKey
+      }
       let response = await instance.get(apiUrl, {
         headers: {
           'Content-Type': 'application/json',
         },
-        // params
+        params
       });
-      console.log(response.data.items)
-      dispatch({ type: "SET_MAIN_BOOKS", payload: response.data.items });
+      const basketBooks = getLocalBooks("basket");
+      let mainArray = response.data.items;
+      const updatedMainArray = mainArray.map((mainObj: IbookAPI) => {
+        const isAdded = basketBooks.some((basketObj: IBook) => basketObj.id === mainObj.id);
+        return { ...mainObj, isAdded: isAdded };
+      });
+      dispatch({ type: "SET_MAIN_BOOKS", payload: updatedMainArray });
       dispatch({ type: "SET_HEADER_NAME", payload: str})
     } catch (err) {
       console.log(err);
@@ -46,12 +53,15 @@ export const FETCH_BOOK = (id: string, func: React.Dispatch<React.SetStateAction
     try {
       if (id) {
         const url = `volumes/${id}`;
-        // const params = {
-        //   api_key: apiKey
-        // }
-        const response = await instance.get(url);
+        const params = {
+          api_key: apiKey
+        }
+        const response = await instance.get(url, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          params});
         const bookData = response.data;
-        console.log(bookData);
         func(bookData);
       }
     } catch(err) {

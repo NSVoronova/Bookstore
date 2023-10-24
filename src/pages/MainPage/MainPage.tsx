@@ -31,7 +31,6 @@ import Loader from "../../components/Loader/Loader";
 
 const MainPage = () => {
   const isLoading = useSelector(({isLoading}) => isLoading);
-  
   const [selectedCategory, setSelectedCategory] = useState("romance");
   const mainBooks = useSelector(({ mainBooks }) => mainBooks);
   const currentPage = useSelector(({ currentPage }) => currentPage);

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { ADD_TO_BASKET } from "../../actions/actions";
 import { getLocalBooks } from "../../helpers";
 import { IBook } from "../../interfaces";
+import { useSelector } from "react-redux";
 
 const BasketBtn = ({
   big,
@@ -22,7 +23,8 @@ const BasketBtn = ({
   author: string;
   isAdded: boolean
 }) => {
-  const [added, setAdded] = useState(isAdded);
+  const basketBooks = useSelector(({basketBooks}) => basketBooks)
+  const [added, setAdded] = useState(basketBooks.find((book:IBook) => book.id === id)) //useState(isAdded);
   const dispatch = useDispatch();
 
   const handleClickToBasket = ({id, imageSrc, price, title, author, isAdded}: IBook) => {

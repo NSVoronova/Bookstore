@@ -20,6 +20,9 @@ font-size: 36px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+& span{
+  color: ${colors.blue};
+}
 `
 
 export const StyledAuthorDiv = styled.div<{$description?: boolean}>`

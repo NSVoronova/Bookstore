@@ -13,14 +13,14 @@ export const FETCH_MAIN_BOOKS = (str: string, currentPage: number) => {
     try {
       const maxRes = currentPage  * 5;
       const apiUrl = `volumes?q=subject:${str}&orderBy=newest&maxResults=${maxRes}`;
-      const params = {
-        api_key: apiKey
-      }
+      // const params = {
+      //   api_key: apiKey
+      // }
       let response = await instance.get(apiUrl, {
         headers: {
           'Content-Type': 'application/json',
         },
-        params
+        // params
       });
       console.log(response.data.items)
       dispatch({ type: "SET_MAIN_BOOKS", payload: response.data.items });
@@ -46,9 +46,9 @@ export const FETCH_BOOK = (id: string, func: React.Dispatch<React.SetStateAction
     try {
       if (id) {
         const url = `volumes/${id}`;
-        const params = {
-          api_key: apiKey
-        }
+        // const params = {
+        //   api_key: apiKey
+        // }
         const response = await instance.get(url);
         const bookData = response.data;
         console.log(bookData);

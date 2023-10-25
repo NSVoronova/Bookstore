@@ -12,7 +12,7 @@ import {
   StyledTextContainer,
 } from "./styledCardFull";
 import { StyledSimpleDiv } from "../../styledConstants";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FavoriteBtn from "../FavoriteBtn/FavoriteBtn";
 import BasketBtn from "../BasketBtn/BasketBtn";
 import { fetchRandomBooks, getLocalBooks } from "../../helpers";
@@ -70,6 +70,7 @@ const BookCardFull = () => {
   const params = useParams();
   const [book, setBook] = useState<IbookAPI | null>(null);
   const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
   const [addBasket, setAddBasket] = useState(
     !!basketB.find((book: IBook) => book.id === params.id)
   );
@@ -87,6 +88,17 @@ const BookCardFull = () => {
 
   // const isAdd =
   // const isFavorit = favoriteBooks.find((book: IBook) => book.id === params.id)
+
+  const handlePay = () => {
+    if(!!basketBooks.find((book: IBook) => book.id === params.id)) {
+      const updatedBasket = basketBooks.filter((book: IBook) => book.id !== params.id);
+      localStorage.setItem("basket", JSON.stringify({ books: updatedBasket }));
+      dispatch({ type: "REMOVE_FROM_BASKET", payload: updatedBasket });
+    }
+      navigate(`/success`);
+      window.scrollTo(0, 0);
+  }
+
   return (
     <>
       {isLoading ? (
@@ -147,7 +159,7 @@ const BookCardFull = () => {
                     ""
                   }
                 />
-                <StyledBuyButton $buy>Buy Now</StyledBuyButton>
+                <StyledBuyButton $buy onClick={handlePay}>Buy Now</StyledBuyButton>
               </StyledSimpleDiv>
             </StyledCardDescriptionWrapper>
           </StyledSimpleDiv>

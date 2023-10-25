@@ -69,6 +69,10 @@ font-size: 20px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+transition: 0.5s background-color;
+&:hover {
+  background-color: ${props => props.$buy ? colors.yellow : colors.orange};
+}
 `
 
 export const StyledTextContainer = styled.div`

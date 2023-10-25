@@ -10,13 +10,19 @@ const Footer = () => {
      <StyledP>BookStore Project</StyledP>
      <StyledSocialDiv>
       <StyledSocialIconDiv>
-      <StyledSocialIcon src={linkedin} alt="app" />
+      <a href="https://www.linkedin.com/in/nadin-voronova/">
+        <StyledSocialIcon src={linkedin} alt="app" />
+      </a>
       </StyledSocialIconDiv>
       <StyledSocialIconDiv>
-      <StyledSocialIcon src={github} alt="app" />
+      <a href="https://github.com/NSVoronova">
+        <StyledSocialIcon src={github} alt="app" />
+      </a>
       </StyledSocialIconDiv>
       <StyledSocialIconDiv>
-      <StyledSocialIcon src={instagram} alt="app" />
+      <a href="https://www.instagram.com/nadin_voronova/">
+        <StyledSocialIcon src={instagram} alt="app" />
+      </a>
       </StyledSocialIconDiv>
      </StyledSocialDiv>
      <StyledP>by Nadzeya Voranava</StyledP>

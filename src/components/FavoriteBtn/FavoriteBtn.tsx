@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { StyledFavoriteBtn } from './styledFavoriteBtn'
 import { useDispatch } from 'react-redux';
 import { getLocalBooks } from '../../helpers';
-import { IBook } from '../../interfaces';
 
 const FavoriteBtn = ({
   id,

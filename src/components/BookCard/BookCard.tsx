@@ -13,14 +13,15 @@ import { IBook } from "../../interfaces";
 const BookCard: FC<IBook> = ({ imageSrc, price, id, title, author, isAdded, isFavorite }) => {
   const navigate = useNavigate();
 
-  const handleClickToBook = () => {
+ 
+  const handleClickToBook = (id: string) => {
     navigate(`/book/${id}`);
     window.scrollTo(0, 0);
   };
 
   return (
     <StyledBookWrapper>
-      <StyledBookImage src={imageSrc} alt="img" onClick={handleClickToBook} />
+      <StyledBookImage src={imageSrc} alt="img" onClick={() => handleClickToBook(id)} />
       <StyledSimpleDiv $between>
         <StyledPriceDiv>{price}$</StyledPriceDiv>
         <FavoriteBtn id={id}

@@ -10,6 +10,7 @@ import {
   StyledDashedDiv,
   StyledExploreButton,
   StyledFlexDiv,
+  StyledGrid,
   StyledMainHeader,
   StyledMainImg,
   StyledMainText,
@@ -120,12 +121,12 @@ const MainPage = () => {
         imageSrc={path_img}
       />
       {/* <button onClick={forceRerender}>rerender {renderCount}</button> */}
-      <StyledSimpleDiv $start>
+      <StyledGrid>
         {Array.isArray(mainBooks) &&
           mainBooks.map((book) => (
             <BookCard
-              isFavorite={favoriteBooks.find((item: IBook) => item.id === book.id)}
-              isAdded={book.isAdded}
+              isFavorite={!!favoriteBooks.find((item: IBook) => item.id === book.id)}
+              isAdded={!!basketBooks.find((item: IBook) => item.id === book.id)}//book.isAdded}
               key={book.id}
               id={book.id}
               imageSrc={book.volumeInfo.imageLinks?.medium ||book.volumeInfo.imageLinks?.small || book.volumeInfo.imageLinks?.thumbnail || book_cover}
@@ -134,7 +135,7 @@ const MainPage = () => {
               title={(book && book.volumeInfo.title) || ""}
             />
           ))}
-      </StyledSimpleDiv>
+      </StyledGrid>
       <StyledSimpleDiv><Button onClick={loadMoreBooks} text={isLoading ? <Loader/> : "Load More.."}></Button></StyledSimpleDiv>
     </>
   );

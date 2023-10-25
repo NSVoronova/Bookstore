@@ -3,11 +3,24 @@ import { StyledBookBasketContainer, StyledDescriptionContainer, StyledImgBookBas
 import { IBook } from '../../interfaces'
 import { StyledNullButton, StyledSimpleDiv } from '../../styledConstants'
 import delete_img from '../../assets/icons/delete.svg'
+import { useNavigate } from 'react-router-dom'
 
-const BookInBasket = ({ id, imageSrc, price, title, author, onDeleteBook}: IBook) => {
+const BookInBasket = ({ id, imageSrc, price, title, author, onDeleteBook, onCloseBasket}: IBook) => {
+  const navigate = useNavigate();
+
+ 
+  const handleClickToBook = (id: string) => {
+    if (onCloseBasket) {
+      onCloseBasket()
+    };
+    navigate(`/book/${id}`);
+    window.scrollTo(0, 0);
+   
+  };
+
    return (
     <StyledBookBasketContainer>
-      <StyledImgBookBasket src={imageSrc} alt="book" />
+      <StyledImgBookBasket src={imageSrc} alt="book" onClick={() => handleClickToBook(id)}/>
       <StyledDescriptionContainer>
         <p>{title}</p>
         <p>{author}</p>

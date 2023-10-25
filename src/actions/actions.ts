@@ -4,7 +4,6 @@ import instance from "../axiosConfig/axiosConfig";
 import { apiKey } from "../key";
 import { IBook } from "../interfaces";
 import { IbookAPI } from "../components/BookCardFull/BookCardFull";
-import { useSelector } from "react-redux";
 import { getLocalBooks } from "../helpers";
 
 export const SET_LOADING_CREATOR = () => ({ type: "SET_LOADING" });

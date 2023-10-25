@@ -8,14 +8,11 @@ import { colors } from "../../styledConstants";
 export const StyledHeader = styled.header`
 display: flex;
 justify-content: space-between;
-margin-bottom: 105px;
+margin-bottom: 105px; 
+& img:first-child {
+  cursor: pointer;
+}
 `
-
-export const StyledIcon = styled.img`
-display: block;
-
-`
-
 export const StyledIconsDiv = styled.div`
 position: relative;
 display: flex;

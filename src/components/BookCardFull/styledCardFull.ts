@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../styledConstants";
 
-export const StyledBookPageDiv = styled.div`
-display: flex;
-justify-content: space-around;
-`
-
 export const StyledCardDescriptionWrapper = styled.div`
 display: flex;
 flex-direction: column;
@@ -24,7 +19,6 @@ line-height: normal;
   color: ${colors.blue};
 }
 `
-
 export const StyledAuthorDiv = styled.div<{$description?: boolean}>`
 margin-top: 10px;
 width: 526px;

@@ -13,6 +13,7 @@ export const StyledBookBasketContainer = styled.div`
 `;
 
 export const StyledImgBookBasket = styled.img`
+  cursor: pointer;
   width: 100px;
   height: auto;
   box-shadow: 10px 12px 10px -6px rgba(61, 60, 60, 0.36);

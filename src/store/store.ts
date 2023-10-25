@@ -47,7 +47,7 @@ const rootReducer = (state = initialState, action: any) => {
       return {
         ...state,
         basketBooks: action.payload,
-        countBasket: state.countBasket - 1
+        countBasket: action.payload.length
       }
     }
     case "ADD_TO_FAVORITE": {

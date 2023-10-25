@@ -8,6 +8,7 @@ export interface IBook {
   isFavorite?: boolean,
   isAdded?: boolean
   onDeleteBook?: () => void,
+  onCloseBasket?: ( )=> void,
 }
 
 export interface IAppState {

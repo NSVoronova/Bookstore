@@ -71,3 +71,14 @@ flex-wrap: wrap;
 justify-content: space-between;
 row-gap: 50px;
 `
+
+export const StyledGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, calc(20% - 20px)); 
+  gap: 20px; 
+  justify-content: start; 
+
+  @media (max-width: 1250px) {
+    grid-template-columns: repeat(3, calc(33.33% - 20px));
+  }
+`

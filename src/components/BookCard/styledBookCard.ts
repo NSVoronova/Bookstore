@@ -1,8 +1,4 @@
 import styled from "styled-components";
-import favorite_img from '../../assets/icons/favorite.svg'
-import favoritewhite_img from '../../assets/icons/favorite_white.svg'
-import basket_img from '../../assets/icons/busket.svg'
-import { colors } from "../../styledConstants";
 
 export const StyledBookWrapper = styled.div`
 width: 200px;
@@ -26,11 +22,6 @@ font-weight: 400;
 line-height: normal;
 padding: 5px;
 `
-
-
-
-
-
 export const StyledBookImage = styled.img`
 cursor: pointer;
 width: 200px;

@@ -6,6 +6,7 @@ import SearchPage from './pages/SearchPage/SearchPage';
 import { Routes, Route } from 'react-router-dom';
 import BookCardFull from './components/BookCardFull/BookCardFull';
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
+import SuccessPage from './pages/SuccessPage/SuccessPage';
 
 function App() {
   return (
@@ -28,7 +29,9 @@ function App() {
         <FavoritesPage/>
       </MainLayout>
       }/>
-
+      <Route path='/success' element={
+        <SuccessPage/>
+      }/>
     </Routes>
       
     </>

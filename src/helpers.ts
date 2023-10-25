@@ -1,7 +1,4 @@
 import instance from "./axiosConfig/axiosConfig";
-import { IbookAPI } from "./components/BookCardFull/BookCardFull";
-import { apiKey } from "./key";
-
 
 export const fetchRandomBooks = async (func: React.Dispatch<React.SetStateAction<never[]>>) => {
   try {
@@ -25,3 +22,4 @@ export const getLocalBooks = (name: string) => {
   const obj = str ? JSON.parse(str) : {books: []};
   return obj.books;
 }
+

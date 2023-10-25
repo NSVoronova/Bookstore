@@ -2,6 +2,7 @@ import styled from "styled-components";
 import favorite_img from '../../assets/icons/favorite.svg'
 import favoritewhite_img from '../../assets/icons/favorite_white.svg'
 import {colors} from '../../styledConstants'
+
 export const StyledFavoriteBtn = styled.button<{$isFavorite: boolean}>`
 width: 57px;
 height: 46px;

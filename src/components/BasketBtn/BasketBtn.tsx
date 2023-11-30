@@ -24,7 +24,7 @@ const BasketBtn = ({
   isAdded: boolean
 }) => {
   
-  const basketBooks = useSelector(({basketBooks}) => basketBooks)
+  // const basketBooks = useSelector(({basketBooks}) => basketBooks)
   const [added, setAdded] = useState(isAdded) //useState(isAdded);
   const dispatch = useDispatch();
   
@@ -42,7 +42,7 @@ const BasketBtn = ({
 
   return (
     <>
-      <StyledBasketBtn type="button" $full={big} $isAdded={added} onClick={() => handleClickToBasket({id, imageSrc, price, title, author})} disabled={added}/>
+      <StyledBasketBtn type="button" $full={big} $isAdded={isAdded} onClick={() => handleClickToBasket({id, imageSrc, price, title, author})} disabled={isAdded}/>
     </>
   );
 };

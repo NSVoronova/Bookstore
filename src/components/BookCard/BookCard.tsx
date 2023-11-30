@@ -29,7 +29,7 @@ const BookCard: FC<IBook> = ({ imageSrc, price, id, title, author, isAdded, isFa
          isFavorite={isFavorite || false}/>
       </StyledSimpleDiv>
       <BasketBtn
-        isAdded={isAdded || false}
+        isAdded={!!isAdded}
         big={false}
         id={id}
         imageSrc={imageSrc}

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { StyledBasketBtn } from "./styledBasketBtn";
 import { useDispatch } from "react-redux";
-import { ADD_TO_BASKET } from "../../actions/actions";
 import { getLocalBooks } from "../../helpers";
 import { IBook } from "../../interfaces";
-import { useSelector } from "react-redux";
 
 const BasketBtn = ({
   big,
@@ -30,7 +28,7 @@ const BasketBtn = ({
   
   const handleClickToBasket = ({id, imageSrc, price, title, author, isAdded}: IBook) => {
     console.log(isAdded)
-    if (!isAdded) {
+    if (!added) {
       const booksBasket: IBook[] = getLocalBooks("basket");
       const newBook = { id, imageSrc, price, title, author };
       booksBasket.push(newBook);

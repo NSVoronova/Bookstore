@@ -1,12 +1,13 @@
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import instance from "../axiosConfig/axiosConfig";
-import { apiKey } from "../key";
+// import { apiKey } from "../key";
 import { IBook } from "../interfaces";
 import { IbookAPI } from "../components/BookCardFull/BookCardFull";
 import { getLocalBooks } from "../helpers";
 
 export const SET_LOADING_CREATOR = () => ({ type: "SET_LOADING" });
+const apiKey = 'AIzaSyCrBKsjKgQVk7md9-2JX6jnp0jIFdNo69g';
 
 export const FETCH_MAIN_BOOKS = (str: string, currentPage: number) => {
   return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
